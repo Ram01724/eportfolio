@@ -55,8 +55,6 @@ export default async function TermPage({ params }) {
       <div className="crumb">
         <Link href="/">Home</Link>
         <span>/</span>
-        <Link href="/courses">Courses</Link>
-        <span>/</span>
         <Link href={`/courses/${course.slug}`}>{course.code}</Link>
         <span>/</span>
         <span>{TERM_LABELS[term]}</span>

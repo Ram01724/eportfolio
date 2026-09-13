@@ -30,11 +30,8 @@ export default async function CoursePage({ params }) {
       <div className="crumb">
         <Link href="/">Home</Link>
         <span>/</span>
-        <Link href="/courses">Courses</Link>
-        <span>/</span>
         <span>{course.code}</span>
       </div>
-
       <section className="block">
         <div className="block-head">
           <span className="card-code">{course.code}</span>

@@ -46,9 +46,6 @@ export default function Nav() {
           <Link href="/about" data-active={is("/about")}>
             About
           </Link>
-          <Link href="/courses" data-active={is("/courses")}>
-            Courses
-          </Link>
         </div>
       </div>
     </nav>
