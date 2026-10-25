@@ -169,12 +169,6 @@ export const courses = [
         activities: [
           {
             name: "Week 8 — PT-M1 Lab Exercise",
-            kind: "pdf",
-            file: "/files/Leliza_ITCC508_PT-M1_Notebook.pdf",
-            note: "Building and evaluating a RAG chatbot over RA 9003. Notebook exported to PDF with all outputs.",
-          },
-          {
-            name: "Week 8 — PT-M1 Lab Exercise",
             kind: "notebook",
             file: "/files/Leliza_ITCC508_PT-M1_Notebook.pdf",
             html: "/files/Leliza_ITCC508_PT-M1_Notebook.html",
