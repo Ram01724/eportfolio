@@ -10,13 +10,19 @@ const KIND_LABEL = {
   image: "Image",
   code: "Code",
   link: "Link",
+  embed: "Spreadsheet",
 };
 
 export default function FileRow({ file }) {
   const [open, setOpen] = useState(false);
-  const { name, kind, file: src, note, colab, href, html } = file;
+  const { name, kind, file: src, note, colab, href, html, learned } = file;
 
-  const inline = kind === "pdf" || kind === "image" ? src : kind === "notebook" ? html : null;
+  const inline =
+    kind === "pdf" || kind === "image"
+      ? src
+      : kind === "notebook" || kind === "embed"
+      ? html
+      : null;
 
   return (
     <article className="file">
@@ -50,6 +56,15 @@ export default function FileRow({ file }) {
           )}
         </div>
       </div>
+
+      {learned && (
+        <div className="file-learned">
+          <h4>What I learned</h4>
+          {(Array.isArray(learned) ? learned : [learned]).map((p, i) => (
+            <p key={i}>{p}</p>
+          ))}
+        </div>
+      )}
 
       {open && inline && (
         <div className="viewer">

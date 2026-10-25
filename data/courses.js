@@ -1,22 +1,18 @@
 // ─── YOUR COURSES ─────────────────────────────────────────────────────────
-// One object per course. Each course has four terms:
-//   expectations · prelim · midterm · finals
-//
 // Each term holds two lists:
 //   activities → exercises, labs, reviewers, seatwork
 //   projects   → the bigger graded output for that term
 //
-// A file entry needs a `kind`, which decides how it opens on the page:
-//   "pdf"      → opens inline           file: "/files/report.pdf"
-//   "image"    → opens inline           file: "/files/matrix.png"
-//   "notebook" → opens inline if you supply `html`, otherwise links to Colab
+// kind decides how a file opens on the page:
+//   "pdf"      → opens inline      file: "/files/report.pdf"
+//   "image"    → opens inline      file: "/files/photo.jpg"
+//   "notebook" → opens inline if you supply `html`
 //   "sheet"    → downloads (.xlsx / .csv)
 //   "doc"      → downloads (.docx)
-//   "code"     → links to a repo
-//   "link"     → links out (live demo, Drive folder, video)
+//   "link"     → links out, uses `href` instead of `file`
 //
-// Put the actual files in  public/files/  and reference them as  /files/<name>
-// Set status to "done" once a term is finished and published.
+// Files go in  public/files/  and are referenced as  /files/<name>
+// Set status to "done" once a term is published.
 
 export const courses = [
   {
@@ -26,8 +22,10 @@ export const courses = [
     instructor: "Prof. Rodolfo C. Raga Jr., PhDCS",
     summary:
       "Supervised learning, feed-forward backpropagation networks, and retrieval-augmented generation, taught through build-and-measure exercises.",
+
     terms: {
-            expectations: {
+      // ══════════════════════════════════════════════════════════════════
+      expectations: {
         status: "done",
         heading: "Course Expectations",
         reflection: [],
@@ -64,9 +62,10 @@ export const courses = [
         projects: [],
       },
 
+      // ══════════════════════════════════════════════════════════════════
       prelim: {
         status: "done",
-        heading: "Prelim",  
+        heading: "Prelim",
         reflection: [
           "Most of my prelim output is here: the Wix ePortfolio from Week 1, two IEEE reports, the PT-P1 performance worksheet with its training screenshot, and the neural network training and testing notebook with its FFBP log. The hardest part was not getting the models to run. It was writing up what they did afterwards.",
 
@@ -78,7 +77,7 @@ export const courses = [
 
           "That is the main thing I am taking from the prelim period. When I write something down, I can check it and improve it. When I do not, I am relying on memory, and memory ran out exactly when I needed it. For the midterm I want to keep notes after every quiz and every exercise, not only for the graded output.",
         ],
-                        activities: [
+        activities: [
           {
             name: "Week 1 — ePortfolio (Wix)",
             kind: "link",
@@ -89,7 +88,7 @@ export const courses = [
             name: "Week 2 — WW-P2 IEEE Report",
             kind: "pdf",
             file: "/files/WW-P2_IEEE_Report_Leliza.pdf",
-            note: "Written work #WW-P2, IEEE-format report.",
+            note: "Written work WW-P2, IEEE-format report.",
           },
           {
             name: "Week 2 — Verification of Completion Proofs",
@@ -140,12 +139,14 @@ export const courses = [
             name: "Week 5 — Long Quiz",
             kind: "image",
             file: "/files/Week5_Long_Quiz_Leliza.jpg",
-            note: "Face-to-face long quiz, ITC 508 (402i) Set B. Screenshot of the closed submission form as proof of completion.",
+            note: "Long quiz through Google Forms, ITC 508 (402i) Set B. Screenshot of the closed form as proof of completion.",
           },
         ],
+        projects: [],
       },
 
-            midterm: {
+      // ══════════════════════════════════════════════════════════════════
+      midterm: {
         status: "done",
         heading: "Midterm",
         reflection: [
@@ -159,18 +160,18 @@ export const courses = [
 
           "The test the lab gives you did not produce any hallucination, so I asked whether the test was hard enough. It was not. Asking about Jupiter only checks the easy case, where the topic is obviously not in the documents. So I asked about a fine for a household that does not separate its waste — something the law looks like it covers but does not. That broke it right away. With the guardrails off, the model applied Section 48 paragraphs (4) to (7) to the household, gave the correct ₱1,000 to ₱3,000 amount, and said it was quoting the documents. Everything was right except who the rule applies to. Those paragraphs are about the collector, not the household. The chatbot did not fail when the topic was missing. It failed when the topic was close, and saying it came from the source made the mistake harder to spot.",
 
-          "Two things about my own process. An earlier draft said I had eight samples from two sessions, but a runtime restart had wiped half of them from the notebook. The report said nothing was thrown away, and nobody reading it could check that. A claim is only worth as much as the proof someone else can look at. I also found four Markdown cells still describing code I had already replaced. Each fix changed the code and left the explanation behind. You do not notice that while working, but a reader notices immediately.",
-
-          "In my course expectations I wrote that I wanted to stop accepting results I could not explain. This is where that stopped being just a plan. The chatbot's most convincing answer was the wrong one, and I only caught it because I went looking.",
-
           "Week 9 covered Lecture 5 on writing a RAG chatbot research proposal tied to a UN Sustainable Development Goal, and the WW-M1 task of updating this ePortfolio with my prelim output. The portfolio you are reading is that output.",
+
+          "Weeks 10 and 11 were WW-M2, done as a group with Mark Emmanuel Sagarino and Sean John Dizon under the name PurpleR. We proposed a RAG chatbot for Philippine consumer-rights questions about online purchases, tied to SDG 12 on responsible consumption and production.",
+
+          "The midterm quiz and examination was taken face to face in a blue book on 5 October 2026. Actually is not really hard but I lack on preparation that's why I need to make sure I study more.",
         ],
         activities: [
           {
             name: "Week 8 — PT-M1 Lab Exercise",
             kind: "pdf",
-            file: "/files/Leliza_ITCC508_PT-M1_Notebook.ipynb - Colab.pdf",
-            note: "Building and evaluating a RAG chatbot. Notebook exported to PDF with all outputs.",
+            file: "/files/REPLACE_WITH_YOUR_PT-M1_NOTEBOOK.pdf",
+            note: "Building and evaluating a RAG chatbot over RA 9003. Notebook exported to PDF with all outputs.",
           },
           {
             name: "Week 8 — PT-M1 Report",
@@ -178,7 +179,58 @@ export const courses = [
             file: "/files/Leliza_ITCC508_PT-M1_Report.pdf",
             note: "Written report on the RAG chatbot build and evaluation.",
           },
+          {
+            name: "Week 9 — WW-M1 (Prelim ePortfolio)",
+            kind: "link",
+            href: "https://eportfolio-fawn.vercel.app",
+            note: "Rebuilt the ePortfolio as a Next.js site on Vercel and published my prelim output to it.",
+            learned: [
+              "I moved off Wix and built this site myself with Next.js, pushing to GitHub and deploying on Vercel. Wix was faster to start but I could not control how a PDF or a spreadsheet actually opened on the page. Here I decided that myself.",
+              "Most of my time went to things I did not expect. A filename with a # in it broke every link, because a browser reads everything after # as a page anchor. My files sat in public/ instead of public/files/, so the server returned my own 404 page inside the viewer and nothing told me why. Vercel treats capital letters in filenames as different files and Windows does not, so something that worked on my laptop could still break live.",
+              "The lesson is that publishing is its own skill. The work being finished is not the same as the work being reachable, and a grader who cannot open a file has the same experience as a grader looking at no file at all.",
+            ],
+          },
+          {
+            name: "Week 10 — WW-M2 Proposal",
+            kind: "pdf",
+            file: "/files/PurpleR_WW-M2_Proposal.pdf",
+            note: "First proposal: a retrieval-augmented chatbot for Philippine consumer-rights questions on online purchases, aligned with SDG 12 Target 12.8. Group output with Sagarino and Dizon.",
+          },
+          {
+            name: "Week 10 — WW-M2 Presentation",
+            kind: "pdf",
+            file: "/files/PurpleR_WW-M2_Presentation.pdf",
+            note: "Seven-slide deck presenting the first proposal.",
+          },
+          {
+            name: "Midterm Examination",
+            kind: "image",
+            file: "/files/Midterm_Exam_Bluebook_Leliza.jpg",
+            note: "Face-to-face midterm examination, written in a blue book on 5 October 2026.",
+          },
         ],
+        projects: [
+          {
+            name: "Week 11 — WW-M2 Revised Proposal (IEEE)",
+            kind: "pdf",
+            file: "/files/PurpleR_WW-M2_Revised_IEEE.pdf",
+            note: "Extended and revised proposal: routing consumer-remedy questions to whichever of four statutes actually governs them, including RA 7394 and the Lemon Law RA 10642.",
+          },
+          {
+            name: "Week 11 — WW-M2 Revised Presentation",
+            kind: "pdf",
+            file: "/files/PurpleR_WW-M2_Revised_Presentation.pdf",
+            note: "Eight-slide deck for the revised proposal.",
+          },
+        ],
+      },
+
+      // ══════════════════════════════════════════════════════════════════
+      finals: {
+        status: "todo",
+        heading: "Final term",
+        reflection: ["This is my final reflection."],
+        activities: [],
         projects: [],
       },
     },
