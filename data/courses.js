@@ -174,10 +174,11 @@ export const courses = [
             note: "Building and evaluating a RAG chatbot over RA 9003. Notebook exported to PDF with all outputs.",
           },
           {
-            name: "Week 8 — PT-M1 Report",
-            kind: "pdf",
-            file: "/files/Leliza_ITCC508_PT-M1_Report.pdf",
-            note: "Written report on the RAG chatbot build and evaluation.",
+            name: "Week 8 — PT-M1 Lab Exercise",
+            kind: "notebook",
+            file: "/files/Leliza_ITCC508_PT-M1_Notebook.pdf",
+            html: "/files/Leliza_ITCC508_PT-M1_Notebook.html",
+            note: "Building and evaluating a RAG chatbot over RA 9003 and DAO 2001-34. Opens in the page with all outputs, or download the PDF.",
           },
           {
             name: "Week 9 — WW-M1 (Prelim ePortfolio)",
