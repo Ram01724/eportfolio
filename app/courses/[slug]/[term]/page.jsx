@@ -23,9 +23,52 @@ export async function generateMetadata({ params }) {
   };
 }
 
+function Reflection({ items, heading }) {
+  if (!items) return null;
+  const list = Array.isArray(items) ? items : [items];
+  if (list.length === 0) return null;
+  return (
+    <details className="reflect">
+      <summary className="reflect-summary">
+        <span className="week-chevron" aria-hidden="true">›</span>
+        <span className="reflect-title">{heading}</span>
+        <span className="reflect-meta">
+          {list.length} {list.length === 1 ? "paragraph" : "paragraphs"}
+        </span>
+      </summary>
+      <div className="reflect-body">
+        {list.map((p, i) => (
+          <p key={i}>{p}</p>
+        ))}
+      </div>
+    </details>
+  );
+}
+
+function WeekGroup({ group }) {
+  const files = group.files || [];
+  return (
+    <details className="week">
+      <summary className="week-summary">
+        <span className="week-chevron" aria-hidden="true">›</span>
+        <span className="week-title">{group.title}</span>
+        <span className="week-meta">
+          {group.blurb ? `${group.blurb} · ` : ""}
+          {files.length} {files.length === 1 ? "file" : "files"}
+        </span>
+      </summary>
+      <div className="week-body">
+        <Reflection items={group.learned} heading="What I learned this week" />
+        {files.map((f) => (
+          <FileRow key={f.name} file={f} />
+        ))}
+      </div>
+    </details>
+  );
+}
+
 function FileGroup({ title, blurb, items }) {
   if (!items || items.length === 0) return null;
-
   return (
     <section style={{ marginTop: "2.5rem" }}>
       <div className="block-head" style={{ marginBottom: "1.1rem" }}>
@@ -48,7 +91,7 @@ export default async function TermPage({ params }) {
   const index = TERM_ORDER.indexOf(term);
   const prev = index > 0 ? TERM_ORDER[index - 1] : null;
   const next = index < TERM_ORDER.length - 1 ? TERM_ORDER[index + 1] : null;
-  const isExpectations = term === "expectations";
+  const groups = data.groups || [];
 
   return (
     <div className="shell">
@@ -67,12 +110,9 @@ export default async function TermPage({ params }) {
           <p>{TERM_BLURB[term]}</p>
         </div>
 
-        <div className="prose">
-          {(data.reflection || []).map((para, i) => (
-            <p key={i}>{para}</p>
-          ))}
-        </div>
-                        {(data.sections || []).map((s, i) => (
+        <Reflection items={data.reflection} heading="My reflection on this term" />
+
+        {(data.sections || []).map((s, i) => (
           <section className="section-box" key={i}>
             <span className="section-letter">{String.fromCharCode(65 + i)}</span>
             <h3>{s.title}</h3>
@@ -84,20 +124,28 @@ export default async function TermPage({ params }) {
           </section>
         ))}
 
-        {!isExpectations && (
-          <>
-            <FileGroup
-              title="Activities"
-              blurb="Exercises, labs, reviewers and seatwork for this term."
-              items={data.activities || []}
-            />
-            <FileGroup
-              title="Project"
-              blurb="The main graded output for this term."
-              items={data.projects || []}
-            />
-          </>
+        {groups.length > 0 && (
+          <section style={{ marginTop: "2.5rem" }}>
+            <div className="block-head" style={{ marginBottom: "1.1rem" }}>
+              <h3 style={{ fontSize: "var(--t-lg)" }}>Weekly activities</h3>
+              <p>Click a week to open its files and my reflection for that week.</p>
+            </div>
+            {groups.map((g, i) => (
+              <WeekGroup key={i} group={g} />
+            ))}
+          </section>
         )}
+
+        <FileGroup
+          title="Activities"
+          blurb="Exercises, labs, reviewers and seatwork for this term."
+          items={data.activities || []}
+        />
+        <FileGroup
+          title="Project"
+          blurb="The main graded output for this term."
+          items={data.projects || []}
+        />
 
         <div className="cta-row" style={{ marginTop: "3rem" }}>
           {prev && (
